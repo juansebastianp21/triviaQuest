@@ -6,7 +6,9 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
 import useQuiz from "./hooks/useQuiz";
+import styles from "./styles/QuizStyles";
 
 const Quiz = (props) => {
   const {
@@ -18,50 +20,36 @@ const Quiz = (props) => {
   } = useQuiz(props);
   return (
     <View style={styles.container}>
-      <Text>{currentQuestion.category}</Text>
-      <View style={styles.questionContainer}>
+      <LinearGradient
+        colors={["#E85630", "#E88E18"]}
+        start={{ x: 0.1, y: 0.2 }}
+        style={styles.categoryContainer}
+      >
+        <Text style={styles.categoryText}>{currentQuestion.category}</Text>
+      </LinearGradient>
+      <View style={[styles.questionContainer, styles.shadowProps]}>
+        <Text style={styles.infoText}>{`${currentIndex + 1} of ${
+          questionList.length
+        }`}</Text>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity onPress={() => onAnswerPress(true)}>
-          <Text>{"True"}</Text>
+        <Text style={styles.buttonsTitle}>{"Select the correct answer"}</Text>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => onAnswerPress(true)}
+        >
+          <Text style={styles.questionText}>{"True"}</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => onAnswerPress(false)}>
-          <Text>{"False"}</Text>
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => onAnswerPress(false)}
+        >
+          <Text style={styles.questionText}>{"False"}</Text>
         </TouchableOpacity>
       </View>
-      <Text>{`${currentIndex + 1} of ${questionList.length}`}</Text>
     </View>
   );
 };
 
 export default Quiz;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFF",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  questionContainer: {
-    width: "80%",
-    height: undefined,
-    aspectRatio: 1,
-    borderWidth: 1,
-    borderColor: "#000",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  questionText: {
-    fontSize: 20,
-    maxWidth: "90%",
-    textAlign: "center",
-  },
-  buttonsContainer: {
-    flexDirection: "row",
-    width: "80%",
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-});

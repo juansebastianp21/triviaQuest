@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Dimensions } from "react-native";
 import {
   getQuestionList,
   answerQuestion,
@@ -10,6 +11,7 @@ import navigationScreenNames from "../../../utils/contants/navigationScreenNames
 const triviaSelector = (state) => state.trivia;
 const useHome = (props) => {
   const { navigation } = props;
+  const { width, height } = Dimensions.get("screen");
   const dispatch = useDispatch();
   const { isLoading, fetchSuccess } = useSelector(triviaSelector);
 
@@ -25,6 +27,8 @@ const useHome = (props) => {
   return {
     onBeginPress,
     isLoading,
+    width,
+    height,
   };
 };
 
