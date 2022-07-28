@@ -12,6 +12,7 @@ import styles from "./styles/HomeStyles";
 import useHome from "./hooks/useHome";
 import { Title } from "../../../assets/images";
 import Loading from "../../components/loading/Loading";
+import Button from "../../components/button/Button";
 
 const Home = (props) => {
   const { isLoading, onBeginPress, width, height } = useHome(props);
@@ -31,12 +32,7 @@ const Home = (props) => {
         </Text>
         <Text style={styles.heading}>{"Can you score 100%?"}</Text>
         <View style={{ height: 40 }} />
-        <TouchableOpacity style={styles.button} onPress={onBeginPress}>
-          {isLoading && (
-            <ActivityIndicator color={"#FFF"} style={styles.loading} />
-          )}
-          <Text style={styles.buttonText}>{"BEGIN"}</Text>
-        </TouchableOpacity>
+        <Button label="BEGIN" isLoading={isLoading} onPress={onBeginPress} />
       </View>
     </View>
   );

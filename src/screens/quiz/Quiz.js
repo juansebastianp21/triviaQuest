@@ -39,13 +39,13 @@ const Quiz = (props) => {
           style={styles.buttonContainer}
           onPress={() => onAnswerPress(true)}
         >
-          <Text style={styles.questionText}>{"True"}</Text>
+          <Text style={styles.buttonText}>{"True"}</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonContainer}
           onPress={() => onAnswerPress(false)}
         >
-          <Text style={styles.questionText}>{"False"}</Text>
+          <Text style={styles.buttonText}>{"False"}</Text>
         </TouchableOpacity>
       </View>
     </View>
