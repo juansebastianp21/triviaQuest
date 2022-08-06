@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#193252",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: StatusBar.currentHeight + 20,
+    paddingTop: StatusBar.currentHeight + 60,
   },
   titleContainer: {
     alignItems: "center",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     width: "100%",
     alignItems: "center",
-    paddingBottom: 10,
+    paddingBottom: 30,
     paddingTop: 60,
   },
 });

@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView,
-  TouchableOpacity,
-  SafeAreaView,
-} from "react-native";
+import { Text, View, ScrollView } from "react-native";
 import useResults from "./hooks/useResults";
 import styles from "./styles/ResultsStyles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -17,7 +10,7 @@ const Results = (props) => {
   const { parsedQuestionList, correctAnswers, onRetryPress } =
     useResults(props);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ScrollView
         style={styles.listContainer}
         showsVerticalScrollIndicator={false}
@@ -52,7 +45,7 @@ const Results = (props) => {
       >
         <Button label="PLAY AGAIN" onPress={onRetryPress} />
       </LinearGradient>
-    </SafeAreaView>
+    </View>
   );
 };
 
