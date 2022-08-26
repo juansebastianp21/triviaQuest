@@ -1,27 +1,28 @@
-import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-  TouchableOpacity,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import useQuiz from "./hooks/useQuiz";
-import styles from "./styles/QuizStyles";
+import React from 'react';
+import { Text, View, TouchableOpacity } from 'react-native';
+import Animated from 'react-native-reanimated';
+import { LinearGradient } from 'expo-linear-gradient';
+import useQuiz from './hooks/useQuiz';
+import styles from './styles/QuizStyles';
+import LottieView from 'lottie-react-native';
 
 const Quiz = (props) => {
   const {
-    isLoading,
     questionList,
     currentQuestion,
     currentIndex,
-    onAnswerPress,
+    modalStyle,
+    answerStyle,
+    buttonPressed,
+    iconAnimationRef,
+    currentAnswerResult,
+    onButtonPress,
+    onLottieAnimationFinished,
   } = useQuiz(props);
   return (
     <View style={styles.container}>
       <LinearGradient
-        colors={["#E85630", "#E88E18"]}
+        colors={['#E85630', '#E88E18']}
         start={{ x: 0.1, y: 0.2 }}
         style={styles.categoryContainer}
       >
@@ -33,21 +34,45 @@ const Quiz = (props) => {
         }`}</Text>
         <Text style={styles.questionText}>{currentQuestion.question}</Text>
       </View>
+      <Text style={styles.buttonsTitle}>{'Select the correct answer'}</Text>
       <View style={styles.buttonsContainer}>
-        <Text style={styles.buttonsTitle}>{"Select the correct answer"}</Text>
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => onAnswerPress(true)}
+          onPress={() => onButtonPress(true)}
         >
-          <Text style={styles.buttonText}>{"True"}</Text>
+          <Text style={styles.buttonText}>{'True'}</Text>
         </TouchableOpacity>
+        <View style={{ height: 30 }} />
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => onAnswerPress(false)}
+          onPress={() => onButtonPress(false)}
         >
-          <Text style={styles.buttonText}>{"False"}</Text>
+          <Text style={styles.buttonText}>{'False'}</Text>
         </TouchableOpacity>
       </View>
+      {buttonPressed && (
+        <Animated.View style={[styles.modal, modalStyle]}>
+          <Animated.View style={[styles.answerContainer, answerStyle]}>
+            {currentAnswerResult ? (
+              <LottieView
+                ref={iconAnimationRef}
+                loop={false}
+                style={styles.icon}
+                source={require('../../../assets/lottie/success.json')}
+                onAnimationFinish={onLottieAnimationFinished}
+              />
+            ) : (
+              <LottieView
+                ref={iconAnimationRef}
+                loop={false}
+                style={styles.icon}
+                source={require('../../../assets/lottie/error.json')}
+                onAnimationFinish={onLottieAnimationFinished}
+              />
+            )}
+          </Animated.View>
+        </Animated.View>
+      )}
     </View>
   );
 };
