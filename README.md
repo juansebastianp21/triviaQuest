@@ -19,3 +19,15 @@ To run the project you need to install the node packages first.
     ```sh
     yarn install
     ```
+
+
+Start the expo server.
+* expo
+  ```sh
+  expo start
+  ```
+  
+
+Run the app.
+* Android: type 'a'.
+* iOS: type 'i'.
